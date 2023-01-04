@@ -11,7 +11,8 @@
 }
 
 .from-container{
-  width:100% !important;
+  width:80% !important;
+  margin: auto;
 }
 
 .shipping-address{
