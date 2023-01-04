@@ -8,20 +8,22 @@ const Addresses = () => {
     const [countries, setCountries] = useState([]);
     const [countryvalue, setCountryValue] = useState('');
 
-    const [divisions, setDivisions] = useState('');
+    const [division, setDivisions] = useState([]);
     const [divisionvalue, setdivisionValue] = useState('');
 
+    // console.log(divisions.divisions)
 
     useEffect(() => {
-        fetch('bd-divisions.json')
+        fetch('https://restcountries.com/v3.1/all')
             .then(response => response.json())
             .then(data => {
-
+                // console.log(data)
                 setCountries(data)
             }
             );
     }, [])
 
+    
     const handleInputCountry = (event) => {
         setCountryValue(event.target.value)
         // console.log(event.target.value)
@@ -36,10 +38,10 @@ const Addresses = () => {
 
 
     useEffect(() => {
-        fetch('bd-divisions.json')
+        fetch("bddivisions.json")
             .then(response => response.json())
             .then(data => {
-
+                // console.log(data)
                 setDivisions(data)
             }
             );
@@ -55,7 +57,7 @@ const Addresses = () => {
     }
 
 
-
+// console.log(divisions)
 
     return (
         <div>
@@ -91,17 +93,22 @@ const Addresses = () => {
                 </div>
                 <div>
                     {   
-                        // divisions?.length && divisions?.filter(division => {
-                        //     // const searchdivision = divisionvalue.toLowerCase();
-                        //     // const divisionName = division.name.toLowerCase();
-                        //     // console.log(division)
-                        //     // return searchdivision && divisionName.startsWith(searchdivision) && divisionName !== searchdivision
-                        // }).slice(0, 5)
-                        divisions?.length && divisions?.map(division =>  console.log(division)
-                        // <div key={division.id} onClick={() => onSearchDivision(division.name)}>{division.name}</div>
-                        )
+                        division.divisions?.length && division.divisions?.filter(division => {
+                            const searchdivision = divisionvalue.toLowerCase();
+                            const divisionName = division.name.toLowerCase();
+                            console.log(division)
+                            return searchdivision && divisionName.startsWith(searchdivision) && divisionName !== searchdivision
+                        }).slice(0, 5)
+                        .map((division)=>(
+                            <div key={division.id} onClick={() => onSearchDivision(division.name)}>{division.name}</div>
+                        ))
+                        
+                        
                     }
                 </div>
+                
+
+<h1>Hello</h1>
 
 
             </div>
